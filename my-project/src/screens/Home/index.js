@@ -4,6 +4,8 @@ import AmazonLogo from "../../assets/amazon_logo.png";
 import MovieTheWhell from "../../assets/movies/the_wheel_of_time.png"
 import { MOVIESWATCHING } from "../../utils/moviesWatching";
 import { MoviesCard } from "../../components/MoviesCard";
+import { MOVIESCRIME } from "../../utils/moviesCrimes";
+import { MOVIESWATCH } from "../../utils/moviesWatch";
 
 export const Home = () => {
     return (
@@ -32,10 +34,29 @@ export const Home = () => {
             <TouchableOpacity style={styles.movieImageThumbnail}>
                 <Image style={styles.movieImage} source={MovieTheWhell} />
             </TouchableOpacity>
-            <ScrollView>
+
+            <ScrollView showsVerticalScrollIndicator={false} style={styles.contentMovies}>
                 <Text style={styles.moviesText}>Continue Watching</Text>
                 <FlatList
                     data={MOVIESWATCHING}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => <MoviesCard movieURL={item.moviesURL} />}
+                    horizontal
+                    contentContainerStyle={styles.contentList}
+                    showsHorizontalScrollIndicator={false}
+                />
+                <Text style={styles.moviesText}>Crime Movies</Text>
+                <FlatList
+                    data={MOVIESCRIME}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => <MoviesCard movieURL={item.moviesURL} />}
+                    horizontal
+                    contentContainerStyle={styles.contentList}
+                    showsHorizontalScrollIndicator={false}
+                />
+                <Text style={styles.moviesText}>Watch in your language</Text>
+                <FlatList
+                    data={MOVIESWATCH}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => <MoviesCard movieURL={item.moviesURL} />}
                     horizontal
@@ -99,4 +120,5 @@ const styles = StyleSheet.create({
         paddingRight: 30,
     },
 
+    contentMovies: {},
 });
